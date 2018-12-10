@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">OOS Firmware Extractor</string>
+    <string name="title_activity_file_list">FileListActivity</string>
+
+    <string name="text_extracted">"Extracted and modified install script. Check and cook!"</string>
+    <string name="text_open_input_stream_error">"Error opening Input Stream : returned null"</string>
+    <string name="text_zip_error">"Error extracting zip…"</string>
+    <string name="text_updater_script_not_found">"updater-script not found"</string>
+    <string name="text_cooked">"Cooked at sdcard/firmwareupdate.zip !"</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
