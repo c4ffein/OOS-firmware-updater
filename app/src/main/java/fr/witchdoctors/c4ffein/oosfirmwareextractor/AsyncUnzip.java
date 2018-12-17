@@ -65,17 +65,19 @@ public class AsyncUnzip extends AsyncTask<Void, Integer, Integer> {
                     int count;
                     byte[] buffer = new byte[8192];
                     while ((ze = zis.getNextEntry()) != null) {
-                        if (!ze.getName().matches("^((RADIO)|(firmware-update)|(META-INF)).*"))
-                            continue;
-                        File file = new File(targetDirectory, ze.getName());
-                        File dir = ze.isDirectory() ? file : file.getParentFile();
-                        if (!dir.isDirectory() && !dir.mkdirs())
-                            throw new FileNotFoundException("Failed to ensure directory : " + dir.getAbsolutePath());
-                        if (ze.isDirectory())
-                            continue;
-                        try (FileOutputStream fout = new FileOutputStream(file)) {
-                            while ((count = zis.read(buffer)) != -1)
-                                fout.write(buffer, 0, count);
+                        if(!isCancelled()) {
+                            if (!ze.getName().matches("^((RADIO)|(firmware-update)|(META-INF)).*"))
+                                continue;
+                            File file = new File(targetDirectory, ze.getName());
+                            File dir = ze.isDirectory() ? file : file.getParentFile();
+                            if (!dir.isDirectory() && !dir.mkdirs())
+                                throw new FileNotFoundException("Failed to ensure directory : " + dir.getAbsolutePath());
+                            if (ze.isDirectory())
+                                continue;
+                            try (FileOutputStream fout = new FileOutputStream(file)) {
+                                while ((count = zis.read(buffer)) != -1)
+                                    fout.write(buffer, 0, count);
+                            }
                         }
                     }
                     modifyUpdaterScript(targetDirectory);
