@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -220,8 +221,9 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final File cacheDir = getCacheDir();
         super.onCreate(savedInstanceState);
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        final File cacheDir = getCacheDir();
         setContentView(R.layout.activity_main);
         final String outputPath = Environment.getExternalStorageDirectory() + "/" + "firmwareupdater.zip";
 
