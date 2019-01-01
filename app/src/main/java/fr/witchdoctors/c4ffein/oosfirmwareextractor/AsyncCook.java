@@ -71,6 +71,11 @@ public class AsyncCook extends AsyncTask<Void, Integer, Integer> {
         BufferedInputStream origin;
         for (File file : fileList) {
             if (file.isDirectory()) {
+                String unmodifiedFilePath = file.getPath();
+                String relativePath = unmodifiedFilePath.substring(basePathLength);
+                ZipEntry entry = new ZipEntry(relativePath);
+                entry.setTime(file.lastModified()); // To keep modification time after unzipping
+                out.putNextEntry(entry);
                 zipSubFolder(out, file, basePathLength);
             } else {
                 byte data[] = new byte[BUFFER];

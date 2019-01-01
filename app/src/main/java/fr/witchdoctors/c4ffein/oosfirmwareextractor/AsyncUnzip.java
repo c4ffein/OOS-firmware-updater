@@ -81,9 +81,15 @@ public class AsyncUnzip extends AsyncTask<Void, Integer, Integer> {
                         }
                     }
                     modifyUpdaterScript(targetDirectory);
-
                 } catch (Exception e) {
                     return -1;
+                }
+                File emptyBootFile = new File(targetDirectory, "boot.img");
+                if(!emptyBootFile.createNewFile())
+                    return -5;
+                File emptySystemDirectory = new File(targetDirectory, "system");
+                if (!emptySystemDirectory.mkdirs()) {
+                    return -4;
                 }
             }
         } catch (Exception e) {
@@ -114,10 +120,11 @@ public class AsyncUnzip extends AsyncTask<Void, Integer, Integer> {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(updaterScriptFile));
             String line;
             boolean inBackup = false;
-            updaterScript.append("ui_print(\"Flashing firmware...\");\n");
             while ((line = bufferedReader.readLine()) != null) {
-                if (line.matches("^(getprop\\(\"ro\\.display\\.series\"\\) ==).*"))
+                if (line.matches("^(getprop\\(\"ro\\.display\\.series\"\\) ==).*")) {
                     updaterScript.append(line).append("\n");
+                    updaterScript.append("ui_print(\"Flashing firmware...\");\n");
+                }
                 else if (line.matches("^ifelse\\(msm.boot_update\\(\"backup\"\\),\\s*\\(.*"))
                     inBackup = true;
                 else if (line.matches("^\\),\\s*\"\"\\);.*"))
