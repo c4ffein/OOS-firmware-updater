@@ -73,7 +73,7 @@ public class AsyncCook extends AsyncTask<Void, Integer, Integer> {
             if (file.isDirectory()) {
                 String unmodifiedFilePath = file.getPath();
                 String relativePath = unmodifiedFilePath.substring(basePathLength);
-                ZipEntry entry = new ZipEntry(relativePath);
+                ZipEntry entry = new ZipEntry(relativePath + "/");
                 entry.setTime(file.lastModified()); // To keep modification time after unzipping
                 out.putNextEntry(entry);
                 zipSubFolder(out, file, basePathLength);
