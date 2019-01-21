@@ -53,7 +53,7 @@ public class AsyncCook extends AsyncTask<Void, Integer, Integer> {
             FileOutputStream dest = new FileOutputStream(zipFilePath);
             ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(dest));
             if (sourceDirectory.isDirectory())
-                zipSubFolder(out, sourceDirectory, sourceDirectory.getPath().length());
+                zipSubFolder(out, sourceDirectory, sourceDirectory.getPath().length() + 1);
             else
                 Log.d("Zipping", "Source File is not a directory");
             out.close();
