@@ -3,7 +3,6 @@ package fr.witchdoctors.c4ffein.oosfirmwareextractor;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -23,31 +22,11 @@ public class AsyncUnzip extends AsyncTask<Void, Integer, Integer> {
     private WeakReference<MainActivity> callerActivityWR;
     private Uri zipFileUri;
     private File targetDirectory;
-    private static AsyncTask<Void, Integer, Integer> myAsyncTaskInstance = null;
 
-    private AsyncUnzip(Activity callerActivity, Uri zipFileUri, File targetDirectory) {
+    AsyncUnzip(Activity callerActivity, Uri zipFileUri, File targetDirectory) {
         this.callerActivityWR = new WeakReference<>((MainActivity) callerActivity);
         this.zipFileUri = zipFileUri;
         this.targetDirectory = targetDirectory;
-    }
-
-    public static AsyncTask<Void, Integer, Integer> getInstance(Activity callerActivity, Uri zipFileUri, File targetDirectory) {
-        if (myAsyncTaskInstance != null && myAsyncTaskInstance.getStatus() == Status.RUNNING) {
-            if (myAsyncTaskInstance.isCancelled())
-                Toast.makeText(callerActivity, "A task is already running cancelled, still using open files. Try later or restart app.", Toast.LENGTH_LONG).show();
-            else
-                Toast.makeText(callerActivity, "A task is already running, try later", Toast.LENGTH_SHORT).show();
-            return null;
-        }
-        if (myAsyncTaskInstance != null && myAsyncTaskInstance.getStatus() == Status.PENDING) {
-            Toast.makeText(callerActivity, "Task already pending.", Toast.LENGTH_LONG).show();
-            return null;
-        }
-        if (myAsyncTaskInstance != null && myAsyncTaskInstance.getStatus() == Status.FINISHED)
-            myAsyncTaskInstance = new AsyncUnzip(callerActivity, zipFileUri, targetDirectory);
-        if (myAsyncTaskInstance == null)
-            myAsyncTaskInstance = new AsyncUnzip(callerActivity, zipFileUri, targetDirectory);
-        return myAsyncTaskInstance;
     }
 
     // Adapted from https://stackoverflow.com/a/10997886

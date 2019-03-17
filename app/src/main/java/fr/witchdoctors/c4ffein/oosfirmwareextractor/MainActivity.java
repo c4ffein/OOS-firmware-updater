@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultData != null) {
                 this.romUri = resultData.getData();
                 textFileSelected.setText(getFileName(this.romUri));
-                AsyncMD5 asyncMD5 = (AsyncMD5) AsyncMD5.getInstance(MainActivity.this, romUri);
+                AsyncMD5 asyncMD5 = (AsyncMD5) AsyncRunner.getMD5Instance(MainActivity.this, romUri);
                 if (asyncMD5 != null) {
                     asyncMD5.execute();
                 } else {
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void callTheCook(String outputPath, File cacheDir) {
-        AsyncCook asyncCook = (AsyncCook) AsyncCook.getInstance(MainActivity.this, outputPath, cacheDir);
+        AsyncCook asyncCook = (AsyncCook) AsyncRunner.getCookInstance(MainActivity.this, cacheDir, outputPath);
         if (asyncCook != null)
             asyncCook.execute();
         else
@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
         extractButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AsyncUnzip asyncUnzip = (AsyncUnzip) AsyncUnzip.getInstance(MainActivity.this, romUri, cacheDir);
+                AsyncUnzip asyncUnzip = (AsyncUnzip) AsyncRunner.getUnzipInstance(MainActivity.this, romUri, cacheDir);
                 if (asyncUnzip != null) {
                     asyncUnzip.execute();
                 } else {

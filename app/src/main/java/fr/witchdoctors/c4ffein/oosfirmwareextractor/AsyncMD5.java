@@ -3,7 +3,6 @@ package fr.witchdoctors.c4ffein.oosfirmwareextractor;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,30 +14,10 @@ import java.security.NoSuchAlgorithmException;
 public class AsyncMD5 extends AsyncTask<Void, Integer, String> {
     private WeakReference<MainActivity> callerActivityWR;
     private Uri fileUri;
-    private static AsyncTask<Void, Integer, String> myAsyncTaskInstance = null;
 
-    private AsyncMD5(Activity callerActivity, Uri fileUri) {
+    AsyncMD5(Activity callerActivity, Uri fileUri) {
         this.callerActivityWR = new WeakReference<>((MainActivity) callerActivity);
         this.fileUri = fileUri;
-    }
-
-    public static AsyncTask<Void, Integer, String> getInstance(Activity callerActivity, Uri fileUri) {
-        if (myAsyncTaskInstance != null && myAsyncTaskInstance.getStatus() == Status.RUNNING) {
-            if (myAsyncTaskInstance.isCancelled())
-                Toast.makeText(callerActivity, "A task is already running cancelled, still using open files. Try later or restart app.", Toast.LENGTH_LONG).show();
-            else
-                Toast.makeText(callerActivity, "A task is already running, try later", Toast.LENGTH_SHORT).show();
-            return null;
-        }
-        if (myAsyncTaskInstance != null && myAsyncTaskInstance.getStatus() == Status.PENDING) {
-            Toast.makeText(callerActivity, "Task already pending.", Toast.LENGTH_LONG).show();
-            return null;
-        }
-        if (myAsyncTaskInstance != null && myAsyncTaskInstance.getStatus() == Status.FINISHED)
-            myAsyncTaskInstance = new AsyncMD5(callerActivity, fileUri);
-        if (myAsyncTaskInstance == null)
-            myAsyncTaskInstance = new AsyncMD5(callerActivity, fileUri);
-        return myAsyncTaskInstance;
     }
 
     @Override
