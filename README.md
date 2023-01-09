@@ -10,7 +10,7 @@
 * Instructions
   * `SELECT ROM TO EXTRACT` - Select your OxygenOS zip
   * Wait for the MD5 check to appear
-  * `EXTRACT` - Unzip to a temp directory, modifying the `updater-script` included in the ROM to only install firmware
+  * `EXTRACT` - Unzip to a temp directory, modifying the `updater-script` included in the ROM and only including some of the files to only install firmware
   * `CHECK` - Check the directory structure and the modified `updater-script` seem ok to you, as I can't guarantee the modifications that worked on my device's OxygenOS ROM structure will work on all future devices
   * `COOK` - Finally generate the `sdcard/firmwareupdater.zip` that you will be able to install from your recovery
 
