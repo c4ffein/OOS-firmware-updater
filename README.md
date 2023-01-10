@@ -13,6 +13,10 @@
   * `EXTRACT` - Unzip to a temp directory, modifying the `updater-script` included in the ROM and only including some of the files to only install firmware
   * `CHECK` - Check the directory structure and the modified `updater-script` seem ok to you, as I can't guarantee the modifications that worked on my device's OxygenOS ROM structure will work on all future devices
   * `COOK` - Finally generate the `sdcard/firmwareupdater.zip` that you will be able to install from your recovery
+* The extracted `sdcard/firmwareupdater.zip` enables you to update the firmware without having to re-flash your custom ROM.
+  You should still keep a working previous version of `firmwareupdater.zip` or of OxygenOS to flash back just in case
+  a change in the OxygenOS ROM directory structure broke compatibility with this tool
+  and flashing the last generated firmware left your device in an unusable state.
 
 ## Contributing
 - Don't hesitate to create an issue to notify me if this app is still working on devices older than OnePlus 5t so I can update this README
