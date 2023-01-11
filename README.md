@@ -7,6 +7,8 @@
       height="80">](https://f-droid.org/packages/fr.witchdoctors.c4ffein.oosfirmwareextractor/)
 
 * Built for and tested on Oneplus 5t (dumpling), but could work on other ROMs using the same file architecture
+* Maybe the custom ROM you want to use already includes the latest radio/firmware.
+  Maybe not, in which case this tool can be useful.
 * Instructions
   * `SELECT ROM TO EXTRACT` - Select your OxygenOS zip
   * Wait for the MD5 check to appear
