@@ -21,7 +21,7 @@
   and flashing the last generated firmware left your device in an unusable state.
 
 ## Contributing
-- Don't hesitate to create an issue to notify me if this app is still working on devices older than OnePlus 5t so I can update this README
+- Don't hesitate to create an issue to notify me if this app is still working on devices newer than OnePlus 5t so I can update this README
 - The UX is really bad as I never expected people to actually use this app and only did it for myself at first.
   You can create an issue if you're still using this app and felt confuse at first launch, I might improve it.
 
